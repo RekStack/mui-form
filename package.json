@@ -46,13 +46,14 @@
     "typescript"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "files": [
     "dist",
     "src"
   ],
   "devDependencies": {
+    "@mui/material": "^5.15.14",
     "@tanstack/config": "^0.6.0",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.66",
@@ -67,12 +68,15 @@
     "publint": "^0.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
   "peerDependencies": {
+    "@mui/material": ">=5",
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "react-hook-form": ">=7"
   }
 }
