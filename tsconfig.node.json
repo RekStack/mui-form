@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "strict": true,
     "composite": true,
     "module": "ESNext",

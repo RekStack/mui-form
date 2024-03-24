@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
 
@@ -23,9 +23,5 @@
   },
   "include": ["src"],
   "extends": "./tsconfig.paths.json",
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

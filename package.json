@@ -46,8 +46,7 @@
     "node": ">=20"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "@emotion/react": "^11.11.4",
