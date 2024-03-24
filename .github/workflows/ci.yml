@@ -41,6 +41,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Build
+        run: pnpm build
       - name: Publish
         run: |
           git config --global user.name 'Rui Araújo'
