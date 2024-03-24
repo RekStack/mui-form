@@ -6,10 +6,7 @@ A collection of Material UI form inputs designed for seamless integration with R
 
 - [x] Text Field -> `<TextField />`
 - [ ] Autocomplete
-- [ ] Button
-- [ ] Button Group
 - [ ] Checkbox
-- [ ] Floating Action Button
 - [ ] Radio Group
 - [ ] Rating
 - [ ] Select

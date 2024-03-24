@@ -11,16 +11,16 @@ export interface TextFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: FieldPath<T>;
   label: string;
-  isOptional?: boolean;
   muiProps?: MuiProps;
+  isOptional?: boolean;
 }
 
 export const TextField = <T extends FieldValues>({
   control,
   label,
   name,
-  isOptional = false,
   muiProps,
+  isOptional = false,
 }: TextFieldProps<T>) => (
   <Controller
     control={control}
