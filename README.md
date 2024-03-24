@@ -14,6 +14,6 @@ A collection of Material UI form inputs designed for seamless integration with R
 - [ ] Select
 - [ ] Slider
 - [ ] Switch
-- [x] Text Field -> `<TextField>`
+- [x] Text Field -> `<TextField />`
 - [ ] Transfer List
 - [ ] Toggle Button
