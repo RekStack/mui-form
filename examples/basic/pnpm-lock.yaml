@@ -20,6 +20,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.14
     version: 5.15.14(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0)
+  '@rekstack/mui-form':
+    specifier: 1.0.0-beta.6
+    version: 1.0.0-beta.6(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@mui/material@5.15.14)(react-dom@18.2.0)(react-hook-form@7.51.1)(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -2140,6 +2143,25 @@ packages:
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
+  /@rekstack/mui-form@1.0.0-beta.6(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@mui/material@5.15.14)(react-dom@18.2.0)(react-hook-form@7.51.1)(react@18.2.0):
+    resolution: {integrity: sha512-5V2ncPMBLKbSF/YE8Wjy6uvz7IFYOcxKf8sOOCc+Q+ftQ5XvXhJN2c0QbimjAfVLUd914ntGPk7NzgnE/rA4Qw==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@emotion/react': '>=11'
+      '@emotion/styled': '>=11'
+      '@mui/material': '>=5'
+      react: '>=18'
+      react-dom: '>=18'
+      react-hook-form: '>=7'
+    dependencies:
+      '@emotion/react': 11.11.4(@types/react@18.2.69)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.4)(@types/react@18.2.69)(react@18.2.0)
+      '@mui/material': 5.15.14(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.69)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-hook-form: 7.51.1(react@18.2.0)
     dev: false
 
   /@rollup/pluginutils@4.2.1:

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 
 /**
@@ -44,10 +44,6 @@ export const useMuiFormConfig = () => {
  */
 export const MuiFormConfigProvider = ({ children, config }: MuiFormConfigProps) => {
   const [configValue] = useState<MuiFormConfig>(config);
-
-  useEffect(() => {
-    console.log('configValue >> ', configValue);
-  }, [configValue]);
 
   return <MuiFormConfigContext.Provider value={configValue}>{children}</MuiFormConfigContext.Provider>;
 };
