@@ -52,13 +52,13 @@
   "devDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.14",
+    "@mui/material": "^5.15.15",
     "@tanstack/config": "^0.6.0",
-    "@types/node": "^20.12.2",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@types/node": "^20.12.4",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^8.57.0",
     "eslint-config-ruiaraujo-react": "^3.1.25",
@@ -69,8 +69,9 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
     "rimraf": "^5.0.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.7"
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

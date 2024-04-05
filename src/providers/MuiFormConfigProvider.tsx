@@ -5,7 +5,7 @@ import type { PropsWithChildren } from 'react';
  * Types
  */
 export interface MuiFormConfig {
-  requiredLabel: string | (() => string);
+  globalRequiredLabel: string | (() => string);
 }
 
 interface MuiFormConfigProps extends PropsWithChildren {
@@ -16,7 +16,7 @@ interface MuiFormConfigProps extends PropsWithChildren {
  * Initializations
  */
 export const defaultValues: MuiFormConfig = {
-  requiredLabel: '*',
+  globalRequiredLabel: '*',
 };
 
 /**
