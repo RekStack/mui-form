@@ -1,5 +1,7 @@
 import { defineConfig, mergeConfig } from 'vite';
-import { tanstackBuildConfig } from '@tanstack/config/src/build';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import { tanstackBuildConfig } from '@tanstack/config/build';
 import eslint from 'vite-plugin-eslint';
 import react from '@vitejs/plugin-react-swc';
 
