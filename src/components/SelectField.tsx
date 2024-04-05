@@ -12,16 +12,6 @@ import type {
   SelectProps,
 } from '@mui/material';
 
-interface Option<V> {
-  label: string;
-  value: string | number;
-  extraLabel?: string;
-  // TODO: Change this to have generic and add option to choose the accessor key, accessor value...
-  // valueAccessor: (value: V) => string | number | boolean;
-  // displayValueAccessor: (value: V) => string | number | boolean;
-  // extraDisplayValueAccessor?: (value: V) => string | number | boolean;
-}
-
 interface MuiProps {
   formControlProps?: FormControlProps;
   selectProps?: SelectProps;
@@ -33,7 +23,6 @@ interface MuiProps {
 
 export interface SelectFieldProps<T extends FieldValues, V extends Record<string, unknown>> extends FieldProps<T> {
   muiProps?: MuiProps;
-  // options: Option<V>[];
   options: V[];
   optionValueAccessor: (value: V) => string | number;
   optionLabelAccessor: (value: V) => string;
