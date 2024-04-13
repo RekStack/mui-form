@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 import { TextField as MuiTextField } from '@mui/material';
-import { useFieldLabel } from '../index';
+import { useFieldLabels } from '../index';
 import type { FieldProps } from '../index';
 import type { FieldValues } from 'react-hook-form';
 import type { TextFieldProps as MuiTextFieldProps } from '@mui/material';
@@ -22,7 +22,7 @@ export const TextField = <T extends FieldValues>({
   requiredLabel,
   onErrorMessage,
 }: TextFieldProps<T>) => {
-  const { fieldLabel } = useFieldLabel({ isOptional, label, requiredLabel });
+  const { fieldLabel } = useFieldLabels({ isOptional, label, requiredLabel });
 
   return (
     <Controller

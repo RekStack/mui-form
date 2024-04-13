@@ -8,7 +8,7 @@ interface Props extends Pick<FieldProps<FieldValues>, 'requiredLabel'> {
   isOptional: boolean;
 }
 
-export const useFieldLabel = ({ label, isOptional, requiredLabel }: Props) => {
+export const useFieldLabels = ({ label, isOptional, requiredLabel }: Props) => {
   const { globalRequiredLabel } = useMuiFormConfig();
 
   const fieldLabel = useMemo(() => {

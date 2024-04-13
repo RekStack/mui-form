@@ -5,17 +5,23 @@ import type { PropsWithChildren } from 'react';
  * Types
  */
 export interface MuiFormConfig {
-  globalRequiredLabel: string | (() => string);
+  globalRequiredLabel: string;
+  globalLoadingErrorLabel: string;
+  globalNoOptionsLabel: string;
+  globalLoadingLabel: string;
 }
 
 interface MuiFormConfigProps extends PropsWithChildren {
-  config: MuiFormConfig;
+  config: Partial<MuiFormConfig>;
 }
 
 /**
  * Initializations
  */
 export const defaultValues: MuiFormConfig = {
+  globalLoadingErrorLabel: 'Error getting the data.',
+  globalLoadingLabel: 'Loading...',
+  globalNoOptionsLabel: 'No options.',
   globalRequiredLabel: '*',
 };
 
@@ -43,7 +49,10 @@ export const useMuiFormConfig = () => {
  * Provider
  */
 export const MuiFormConfigProvider = ({ children, config }: MuiFormConfigProps) => {
-  const [configValue] = useState<MuiFormConfig>(config);
+  const [configValue] = useState<MuiFormConfig>({
+    ...defaultValues,
+    ...config,
+  });
 
   return <MuiFormConfigContext.Provider value={configValue}>{children}</MuiFormConfigContext.Provider>;
 };
