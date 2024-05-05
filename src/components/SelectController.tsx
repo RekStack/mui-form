@@ -10,9 +10,14 @@ import {
   Typography,
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
-import { useAsyncFieldLabels, useFieldLabels, useFieldWithOptionsLabels } from '../index';
+import { useAsyncFieldControllerLabels, useFieldControllerLabels, useFieldControllerWithOptionsLabels } from '../index';
 import { useMemo } from 'react';
-import type { AsyncFieldProps, FieldProps, FieldWithOptionsProps, ObjectLike } from '../index';
+import type {
+  AsyncFieldControllerProps,
+  FieldControllerProps,
+  FieldControllerWithOptionsProps,
+  ObjectLike,
+} from '../index';
 import type {
   CircularProgressProps,
   FormControlProps,
@@ -28,7 +33,6 @@ import type { FieldValues } from 'react-hook-form';
 
 interface MuiProps {
   formControlProps?: FormControlProps;
-  selectProps?: SelectProps;
   inputLabelProps?: InputLabelProps;
   menuItemProps?: MenuItemProps;
   loadingMenuItemProps?: MenuItemProps;
@@ -43,39 +47,52 @@ interface MuiProps {
   loadingCircularProgressProps?: CircularProgressProps;
 }
 
-export interface SelectFieldProps<T extends FieldValues, V extends ObjectLike>
-  extends FieldProps<T>,
-    AsyncFieldProps,
-    FieldWithOptionsProps<V> {
+export interface SelectControllerProps<FV extends FieldValues, Value extends ObjectLike>
+  extends FieldControllerProps<FV>,
+    AsyncFieldControllerProps,
+    FieldControllerWithOptionsProps<Value>,
+    Omit<SelectProps, 'renderValue' | 'label' | 'name' | 'error'> {
   muiProps?: MuiProps;
-  optionValueAccessor: (value: V) => string | number;
-  optionLabelAccessor: (value: V) => string;
-  optionExtraLabelAccessor?: (value: V) => string;
+  optionValueAccessor: (value: Value) => string | number;
+  optionLabelAccessor: (value: Value) => string;
+  // FIXME: find a shorter name
+  /**
+   * Defaults `true`
+   */
+  displayExtraLabelWhenValueSelected?: boolean;
+  optionExtraLabelAccessor?: (value: Value) => string;
 }
 
-export const SelectField = <T extends FieldValues, V extends ObjectLike>({
+export const SelectController = <FV extends FieldValues, Value extends ObjectLike>({
   control,
   label,
   name,
-  isOptional = false,
+  optional = false,
   muiProps,
   requiredLabel,
   onErrorMessage,
   options,
   optionLabelAccessor,
   optionValueAccessor,
+  displayExtraLabelWhenValueSelected = true,
   optionExtraLabelAccessor,
   loadingErrorLabel,
-  isLoading = false,
+  loading = false,
   loadingLabel,
-  isError = false,
+  loadingError = false,
   noOptionsLabel,
-}: SelectFieldProps<T, V>) => {
-  const { fieldLabel } = useFieldLabels({ isOptional, label, requiredLabel });
-  const { fieldLoadingErrorLabel, fieldLoadingLabel } = useAsyncFieldLabels({ loadingErrorLabel, loadingLabel });
-  const { fieldNoOptionsLabel } = useFieldWithOptionsLabels({ noOptionsLabel });
+  ...selectProps
+}: SelectControllerProps<FV, Value>) => {
+  const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
+  const { fieldControllerLoadingErrorLabel, fieldControllerLoadingLabel } = useAsyncFieldControllerLabels({
+    loadingErrorLabel,
+    loadingLabel,
+  });
+  const { fieldControllerNoOptionsLabel } = useFieldControllerWithOptionsLabels({
+    noOptionsLabel,
+  });
 
-  const displayOptions = useMemo(() => !isLoading && !isError, [isError, isLoading]);
+  const shouldDisplayOptions = useMemo(() => !loading && !loadingError, [loadingError, loading]);
 
   return (
     <Controller
@@ -87,23 +104,27 @@ export const SelectField = <T extends FieldValues, V extends ObjectLike>({
           error={invalid}
           fullWidth
         >
-          <InputLabel {...muiProps?.inputLabelProps}>{fieldLabel}</InputLabel>
+          <InputLabel {...muiProps?.inputLabelProps}>{fieldControllerLabel}</InputLabel>
           <Select
-            {...muiProps?.selectProps}
             {...field}
-            aria-required={isOptional ? 'false' : 'true'}
-            label={fieldLabel}
+            aria-required={optional ? 'false' : 'true'}
+            label={fieldControllerLabel}
             renderValue={(selected) => {
               const found = options?.find((option) => optionValueAccessor(option) === selected);
 
               if (found) {
+                if (optionExtraLabelAccessor?.(found) && displayExtraLabelWhenValueSelected) {
+                  return `${optionLabelAccessor(found)}, ${optionExtraLabelAccessor(found)}`;
+                }
+
                 return optionLabelAccessor(found);
               }
 
               return '';
             }}
+            {...selectProps}
           >
-            {isLoading && (
+            {loading && (
               <MenuItem
                 {...muiProps?.loadingMenuItemProps}
                 disabled
@@ -115,7 +136,7 @@ export const SelectField = <T extends FieldValues, V extends ObjectLike>({
                   width='100%'
                   {...muiProps?.loadingStackProps}
                 >
-                  <Typography {...muiProps?.loadingTypographyProps}>{fieldLoadingLabel}</Typography>
+                  <Typography {...muiProps?.loadingTypographyProps}>{fieldControllerLoadingLabel}</Typography>
                   <CircularProgress
                     size={30}
                     {...muiProps?.loadingCircularProgressProps}
@@ -123,23 +144,23 @@ export const SelectField = <T extends FieldValues, V extends ObjectLike>({
                 </Stack>
               </MenuItem>
             )}
-            {isError && (
+            {loadingError && (
               <MenuItem
                 {...muiProps?.errorMenuItemProps}
                 disabled
               >
-                <Typography {...muiProps?.errorTypographyProps}>{fieldLoadingErrorLabel}</Typography>
+                <Typography {...muiProps?.errorTypographyProps}>{fieldControllerLoadingErrorLabel}</Typography>
               </MenuItem>
             )}
-            {displayOptions && options?.length === 0 && (
+            {shouldDisplayOptions && options?.length === 0 && (
               <MenuItem
                 disabled
                 {...muiProps?.noOptionsMenuItemProps}
               >
-                <Typography {...muiProps?.noOptionsTypographyProps}>{fieldNoOptionsLabel}</Typography>
+                <Typography {...muiProps?.noOptionsTypographyProps}>{fieldControllerNoOptionsLabel}</Typography>
               </MenuItem>
             )}
-            {displayOptions &&
+            {shouldDisplayOptions &&
               options?.map((option) => (
                 <MenuItem
                   {...muiProps?.menuItemProps}

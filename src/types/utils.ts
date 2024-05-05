@@ -1,1 +1,2 @@
-export type ObjectLike = Record<string, any>;
+// TODO: remove this type
+export type ObjectLike = object;

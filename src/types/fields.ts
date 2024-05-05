@@ -1,23 +1,23 @@
 import { Control, FieldPath, FieldValues } from 'react-hook-form';
 import { ObjectLike } from './utils';
 
-export interface FieldProps<T extends FieldValues> {
-  control: Control<T>;
-  name: FieldPath<T>;
+export interface FieldControllerProps<FV extends FieldValues> {
+  control: Control<FV>;
+  name: FieldPath<FV>;
   label: string;
-  isOptional?: boolean;
+  optional?: boolean;
   requiredLabel?: string;
   onErrorMessage?: (error: string) => string;
 }
 
-export interface AsyncFieldProps {
+export interface AsyncFieldControllerProps {
   loadingLabel?: string;
-  isLoading?: boolean;
+  loading?: boolean;
   loadingErrorLabel?: string;
-  isError?: boolean;
+  loadingError?: boolean;
 }
 
-export interface FieldWithOptionsProps<V extends ObjectLike> {
-  options?: V[];
+export interface FieldControllerWithOptionsProps<Value extends ObjectLike> {
+  options: Array<Value>;
   noOptionsLabel?: string;
 }

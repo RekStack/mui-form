@@ -1,3 +1,3 @@
-export * from './useFieldLabels';
-export * from './useAsyncFieldLabels';
-export * from './useFieldWithOptionsLabels';
+export * from './useFieldControllerLabels';
+export * from './useAsyncFieldControllerLabels';
+export * from './useFieldControllerWithOptionsLabels';

@@ -12,12 +12,12 @@ pnpm add @rekstack/mui-form@beta
 
 ### Supported components:
 
-- [x] Text Field -> `<TextField />`
-- [ ] Autocomplete
+- [x] Text Field -> `<TextFieldController />`
+- [x] Autocomplete -> `<AutocompleteController />`
 - [ ] Checkbox
 - [ ] Radio Group
 - [ ] Rating
-- [ ] Select
+- [x] Select -> `<SelectController />`
 - [ ] Slider
 - [ ] Switch
 - [ ] Transfer List
