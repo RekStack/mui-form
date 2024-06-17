@@ -1,1 +1,1 @@
-export * from './MuiFormConfigProvider';
+export * from './MuiFormProvider';

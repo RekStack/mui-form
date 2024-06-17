@@ -11,7 +11,7 @@ export interface MuiFormConfig {
   globalLoadingLabel: string;
 }
 
-interface MuiFormConfigProps extends PropsWithChildren {
+interface MuiFormProps extends PropsWithChildren {
   config: Partial<MuiFormConfig>;
 }
 
@@ -33,10 +33,10 @@ export const defaultValues: MuiFormConfig = {
 /**
  * Context
  */
-const MuiFormConfigContext = createContext<MuiFormConfig>(defaultValues);
+const MuiFormContext = createContext<MuiFormConfig>(defaultValues);
 
 export const useMuiFormConfig = () => {
-  const context = useContext(MuiFormConfigContext);
+  const context = useContext(MuiFormContext);
 
   if (context === undefined) {
     return defaultValues;
@@ -48,11 +48,11 @@ export const useMuiFormConfig = () => {
 /**
  * Provider
  */
-export const MuiFormConfigProvider = ({ children, config }: MuiFormConfigProps) => {
+export const MuiFormProvider = ({ children, config }: MuiFormProps) => {
   const [configValue] = useState<MuiFormConfig>({
     ...defaultValues,
     ...config,
   });
 
-  return <MuiFormConfigContext.Provider value={configValue}>{children}</MuiFormConfigContext.Provider>;
+  return <MuiFormContext.Provider value={configValue}>{children}</MuiFormContext.Provider>;
 };
