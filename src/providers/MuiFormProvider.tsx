@@ -9,6 +9,7 @@ export interface MuiFormConfig {
   globalLoadingErrorLabel: string;
   globalNoOptionsLabel: string;
   globalLoadingLabel: string;
+  globalOnErrorMessage?: (error: string) => string;
 }
 
 interface MuiFormProps extends PropsWithChildren {

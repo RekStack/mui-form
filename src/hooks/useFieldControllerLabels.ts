@@ -19,5 +19,5 @@ export const useFieldControllerLabels = ({ label, optional, requiredLabel }: Pro
     return `${label} ${requiredLabel || globalRequiredLabel}`;
   }, [optional, label, requiredLabel, globalRequiredLabel]);
 
-  return { fieldControllerLabel };
+  return { fieldControllerLabel } as const;
 };

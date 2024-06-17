@@ -1,6 +1,6 @@
 import { TextField as MuiTextField } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { useFieldControllerLabels } from '../index';
+import { useFieldControllerLabels, useOnErrorMessage } from '../hooks';
 import type { FieldControllerProps } from '../index';
 import type { FieldValues } from 'react-hook-form';
 import type { TextFieldProps } from '@mui/material';
@@ -22,6 +22,7 @@ export const TextFieldController = <FV extends FieldValues>({
   ...textFieldProps
 }: TextFieldControllerProps<FV>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
+  const { fieldOnErrorMessage } = useOnErrorMessage({ onErrorMessage });
 
   const {
     field: { onChange, ...restField },
@@ -38,7 +39,7 @@ export const TextFieldController = <FV extends FieldValues>({
       {...restField}
       aria-required={optional ? 'false' : 'true'}
       error={invalid}
-      helperText={onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
+      helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
       label={fieldControllerLabel}
       onChange={(e) => {
         if (maxLength === undefined) {

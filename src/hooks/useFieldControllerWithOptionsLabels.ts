@@ -12,5 +12,5 @@ export const useFieldControllerWithOptionsLabels = ({ noOptionsLabel }: Props) =
     [globalNoOptionsLabel, noOptionsLabel],
   );
 
-  return { fieldControllerNoOptionsLabel };
+  return { fieldControllerNoOptionsLabel } as const;
 };

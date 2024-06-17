@@ -16,5 +16,5 @@ export const useAsyncFieldControllerLabels = ({ loadingErrorLabel, loadingLabel 
     [loadingErrorLabel, globalLoadingErrorLabel],
   );
 
-  return { fieldControllerLoadingErrorLabel, fieldControllerLoadingLabel };
+  return { fieldControllerLoadingErrorLabel, fieldControllerLoadingLabel } as const;
 };
