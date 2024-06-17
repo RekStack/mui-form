@@ -6,6 +6,7 @@ export interface FieldControllerProps<FV extends FieldValues> {
   name: FieldPath<FV>;
   label: string;
   optional?: boolean;
+  disabled?: boolean;
   requiredLabel?: string;
   onErrorMessage?: (error: string) => string;
 }

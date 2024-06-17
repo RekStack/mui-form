@@ -1,12 +1,14 @@
-import { Controller } from 'react-hook-form';
 import { TextField as MuiTextField } from '@mui/material';
+import { useController } from 'react-hook-form';
 import { useFieldControllerLabels } from '../index';
 import type { FieldControllerProps } from '../index';
 import type { FieldValues } from 'react-hook-form';
 import type { TextFieldProps } from '@mui/material';
 
-export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> &
-  Omit<TextFieldProps, 'error' | 'helperText' | 'label' | 'name'>;
+export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> & { maxLength?: number } & Omit<
+    TextFieldProps,
+    'error' | 'helperText' | 'label' | 'name' | 'disabled' | 'onChange' | 'value' | 'onBlur'
+  >;
 
 export const TextFieldController = <FV extends FieldValues>({
   control,
@@ -15,24 +17,36 @@ export const TextFieldController = <FV extends FieldValues>({
   optional = false,
   requiredLabel,
   onErrorMessage,
+  disabled = false,
+  maxLength,
   ...textFieldProps
 }: TextFieldControllerProps<FV>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
 
+  const {
+    field: { onChange, ...restField },
+    fieldState: { invalid, error },
+  } = useController({
+    control,
+    disabled,
+    name,
+  });
+
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field, fieldState: { invalid, error } }) => (
-        <MuiTextField
-          {...field}
-          aria-required={optional ? 'false' : 'true'}
-          error={invalid}
-          helperText={onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
-          label={fieldControllerLabel}
-          {...textFieldProps}
-        />
-      )}
+    <MuiTextField
+      {...textFieldProps}
+      {...restField}
+      aria-required={optional ? 'false' : 'true'}
+      error={invalid}
+      helperText={onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
+      label={fieldControllerLabel}
+      onChange={(e) => {
+        if (maxLength === undefined) {
+          onChange(e);
+        } else if (e.target.value.length <= maxLength) {
+          onChange(e);
+        }
+      }}
     />
   );
 };
