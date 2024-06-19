@@ -5,6 +5,10 @@ import type { DistributiveOmit, FieldControllerProps } from '../types/index';
 import type { FieldValues } from 'react-hook-form';
 import type { MuiTelInputProps } from 'mui-tel-input';
 
+// Export mui-tel-input method that could help people to make validations
+// without the need to install the peer-dependency
+export { matchIsValidTel } from 'mui-tel-input';
+
 export type PhoneInputControllerProps<FV extends FieldValues> = FieldControllerProps<FV> &
   DistributiveOmit<
     MuiTelInputProps,
