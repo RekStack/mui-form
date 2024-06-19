@@ -1,6 +1,6 @@
 {
   "name": "@rekstack/mui-form",
-  "version": "1.0.0-beta.15",
+  "version": "1.0.0-beta.16",
   "description": "A collection of Material UI form inputs designed for seamless integration with React Hook Form.",
   "author": {
     "name": "Rui Araújo"
