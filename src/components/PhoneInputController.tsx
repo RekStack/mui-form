@@ -49,7 +49,7 @@ export const PhoneInputController = <FV extends FieldValues>({
       sx={{
         ...muiTelInputProps?.sx,
         '.MuiTelInput-FlagImg': {
-          borderRadius: (theme) => theme.shape.borderRadius / 4,
+          borderRadius: 0.5,
         },
       }}
       {...muiTelInputProps}
