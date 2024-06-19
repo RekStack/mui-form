@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useMuiFormConfig } from '../index';
-import type { AsyncFieldControllerProps } from '../index';
+import { useMuiFormConfig } from '../providers';
+import type { AsyncFieldControllerProps } from '../types';
 
 interface Props extends Omit<AsyncFieldControllerProps, 'isLoading'> {}
 

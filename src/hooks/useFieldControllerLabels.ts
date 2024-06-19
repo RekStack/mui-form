@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useMuiFormConfig } from '../index';
-import type { FieldControllerProps } from '../index';
+import { useMuiFormConfig } from '../providers';
+import type { FieldControllerProps } from '../types';
 import type { FieldValues } from 'react-hook-form';
 
 interface Props extends Pick<FieldControllerProps<FieldValues>, 'requiredLabel'> {
