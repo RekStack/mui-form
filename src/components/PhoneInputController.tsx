@@ -1,7 +1,9 @@
-import { FieldValues, useController } from 'react-hook-form';
+import { MuiTelInput } from 'mui-tel-input';
+import { useController } from 'react-hook-form';
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks';
-import { DistributiveOmit, FieldControllerProps } from '../types';
-import { MuiTelInput, type MuiTelInputProps } from 'mui-tel-input';
+import type { DistributiveOmit, FieldControllerProps } from '../types';
+import type { FieldValues } from 'react-hook-form';
+import type { MuiTelInputProps } from 'mui-tel-input';
 
 export type PhoneInputControllerProps<FV extends FieldValues> = FieldControllerProps<FV> &
   DistributiveOmit<
@@ -34,16 +36,16 @@ export const PhoneInputController = <FV extends FieldValues>({
   return (
     <MuiTelInput
       {...restField}
-      defaultCountry='PT'
       aria-required={optional ? 'false' : 'true'}
+      defaultCountry='PT'
       error={invalid}
       helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
       inputRef={ref}
-      ref={ref}
       label={fieldControllerLabel}
       onChange={(_, info) => {
         onChange(info.numberValue);
       }}
+      ref={ref}
       sx={{
         ...muiTelInputProps?.sx,
         '.MuiTelInput-FlagImg': {
