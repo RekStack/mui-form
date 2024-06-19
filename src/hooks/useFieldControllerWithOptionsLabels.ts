@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useMuiFormConfig } from '../providers';
-import type { FieldControllerWithOptionsProps, ObjectLike } from '../types';
+import { useMuiFormConfig } from '../providers/index';
+import type { FieldControllerWithOptionsProps, ObjectLike } from '../types/index';
 
 interface Props extends Pick<FieldControllerWithOptionsProps<ObjectLike>, 'noOptionsLabel'> {}
 

@@ -1,13 +1,17 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
-import { useAsyncFieldControllerLabels, useFieldControllerLabels, useFieldControllerWithOptionsLabels } from '../hooks';
+import {
+  useAsyncFieldControllerLabels,
+  useFieldControllerLabels,
+  useFieldControllerWithOptionsLabels,
+} from '../hooks/index';
 import { useState } from 'react';
 import type {
   AsyncFieldControllerProps,
   FieldControllerProps,
   FieldControllerWithOptionsProps,
   ObjectLike,
-} from '../types';
+} from '../types/index';
 import type { AutocompleteProps, AutocompleteValue, ChipTypeMap, TextFieldProps } from '@mui/material';
 import type { FieldValues } from 'react-hook-form';
 

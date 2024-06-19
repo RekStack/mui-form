@@ -1,7 +1,7 @@
 import { MuiTelInput } from 'mui-tel-input';
 import { useController } from 'react-hook-form';
-import { useFieldControllerLabels, useOnErrorMessage } from '../hooks';
-import type { DistributiveOmit, FieldControllerProps } from '../types';
+import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
+import type { DistributiveOmit, FieldControllerProps } from '../types/index';
 import type { FieldValues } from 'react-hook-form';
 import type { MuiTelInputProps } from 'mui-tel-input';
 

@@ -10,14 +10,18 @@ import {
   Typography,
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
-import { useAsyncFieldControllerLabels, useFieldControllerLabels, useFieldControllerWithOptionsLabels } from '../hooks';
+import {
+  useAsyncFieldControllerLabels,
+  useFieldControllerLabels,
+  useFieldControllerWithOptionsLabels,
+} from '../hooks/index';
 import { useMemo } from 'react';
 import type {
   AsyncFieldControllerProps,
   FieldControllerProps,
   FieldControllerWithOptionsProps,
   ObjectLike,
-} from '../types';
+} from '../types/index';
 import type {
   CircularProgressProps,
   FormControlProps,

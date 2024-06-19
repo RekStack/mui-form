@@ -1,7 +1,7 @@
 import { TextField as MuiTextField } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { useFieldControllerLabels, useOnErrorMessage } from '../hooks';
-import type { FieldControllerProps } from '../types';
+import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
+import type { FieldControllerProps } from '../types/index';
 import type { FieldValues } from 'react-hook-form';
 import type { TextFieldProps } from '@mui/material';
 

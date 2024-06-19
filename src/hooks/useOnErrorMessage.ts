@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useMuiFormConfig } from '../providers';
+import { useMuiFormConfig } from '../providers/index';
 
 interface Props {
   onErrorMessage?: (error: string) => string;
