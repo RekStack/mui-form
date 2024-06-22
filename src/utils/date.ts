@@ -1,4 +1,4 @@
-import { PickerValidDate } from '@mui/x-date-pickers';
+import type { PickerValidDate } from '@mui/x-date-pickers';
 
 export const stringToDate = <T>(date: T): null | undefined | PickerValidDate => {
   if (typeof date === 'number' || typeof date === 'string' || date instanceof Date) {
