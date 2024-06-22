@@ -1,9 +1,8 @@
-import { TextField as MuiTextField } from '@mui/material';
+import { TextField, type TextFieldProps } from '@mui/material';
 import { useController } from 'react-hook-form';
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
 import type { FieldControllerProps } from '../types/index';
 import type { FieldValues } from 'react-hook-form';
-import type { TextFieldProps } from '@mui/material';
 
 export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> & { maxLength?: number } & Omit<
     TextFieldProps,
@@ -34,7 +33,7 @@ export const TextFieldController = <FV extends FieldValues>({
   });
 
   return (
-    <MuiTextField
+    <TextField
       {...textFieldProps}
       {...restField}
       aria-required={optional ? 'false' : 'true'}

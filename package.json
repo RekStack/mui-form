@@ -54,6 +54,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.20",
+    "@mui/x-date-pickers": "^7.7.1",
     "@tanstack/config": "^0.7.11",
     "@types/node": "^20.14.6",
     "@types/react": "^18.3.3",
@@ -78,7 +79,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.16",
+    "@mui/x-date-pickers": "^7.7.1",
     "mui-tel-input": "^5.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
