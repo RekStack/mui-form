@@ -1,8 +1,9 @@
-import { TextField, type TextFieldProps } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useController } from 'react-hook-form';
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
 import type { FieldControllerProps } from '../types/index';
 import type { FieldValues } from 'react-hook-form';
+import type { TextFieldProps } from '@mui/material';
 
 export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> & { maxLength?: number } & Omit<
     TextFieldProps,
