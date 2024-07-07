@@ -22,7 +22,7 @@ export const DatePickerController = <
   PickerEnableAccessibleFieldDOMStructure extends boolean = false,
 >({
   control,
-  controllerDisabled = false,
+  controllerDisabled,
   label,
   name,
   optional = false,

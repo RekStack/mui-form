@@ -69,7 +69,7 @@ export interface SelectControllerProps<FV extends FieldValues, Value extends Obj
 
 export const SelectController = <FV extends FieldValues, Value extends ObjectLike>({
   control,
-  controllerDisabled = false,
+  controllerDisabled,
   label,
   name,
   optional = false,

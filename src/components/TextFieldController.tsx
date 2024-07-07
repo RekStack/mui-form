@@ -12,7 +12,7 @@ export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerPr
 
 export const TextFieldController = <FV extends FieldValues>({
   control,
-  controllerDisabled = false,
+  controllerDisabled,
   label,
   name,
   optional = false,

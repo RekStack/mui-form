@@ -14,7 +14,7 @@ export type PhoneInputControllerProps<FV extends FieldValues> = FieldControllerP
 
 export const PhoneInputController = <FV extends FieldValues>({
   control,
-  controllerDisabled = false,
+  controllerDisabled,
   label,
   name,
   optional = false,
