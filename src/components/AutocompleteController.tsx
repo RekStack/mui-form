@@ -4,6 +4,7 @@ import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
+  useOnErrorMessage,
 } from '../hooks/index';
 import { useState } from 'react';
 import type {
@@ -71,6 +72,7 @@ export const AutocompleteController = <
   ...autocompleteProps
 }: AutocompleteControllerProps<FV, Value, Multiple, DisableClearable, FreeSolo, ChipComponent>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
+  const { fieldOnErrorMessage } = useOnErrorMessage({ onErrorMessage });
   const { fieldControllerLoadingErrorLabel, fieldControllerLoadingLabel } = useAsyncFieldControllerLabels({
     loadingErrorLabel,
     loadingLabel,
@@ -138,7 +140,7 @@ export const AutocompleteController = <
               }}
               {...muiProps?.textField}
               error={invalid}
-              helperText={onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
+              helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
               label={fieldControllerLabel}
             />
           )}
