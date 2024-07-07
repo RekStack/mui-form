@@ -7,7 +7,7 @@ import type { TextFieldProps } from '@mui/material';
 
 export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> & { maxLength?: number } & Omit<
     TextFieldProps,
-    'error' | 'helperText' | 'label' | 'name' | 'disabled' | 'onChange' | 'value' | 'onBlur'
+    'error' | 'helperText' | 'label' | 'name' | 'onChange' | 'value' | 'onBlur'
   >;
 
 export const TextFieldController = <FV extends FieldValues>({
