@@ -9,12 +9,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { Controller } from 'react-hook-form';
 import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
 } from '../hooks/index';
+import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
 import type {
   AsyncFieldControllerProps,
@@ -69,6 +69,7 @@ export interface SelectControllerProps<FV extends FieldValues, Value extends Obj
 
 export const SelectController = <FV extends FieldValues, Value extends ObjectLike>({
   control,
+  controllerDisabled = false,
   label,
   name,
   optional = false,
@@ -98,94 +99,97 @@ export const SelectController = <FV extends FieldValues, Value extends ObjectLik
 
   const shouldDisplayOptions = useMemo(() => !loading && !loadingError, [loadingError, loading]);
 
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({
+    control,
+    disabled: controllerDisabled,
+    name,
+  });
+
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field, fieldState: { invalid, error } }) => (
-        <FormControl
-          {...muiProps?.formControlProps}
-          error={invalid}
-          fullWidth
-        >
-          <InputLabel {...muiProps?.inputLabelProps}>{fieldControllerLabel}</InputLabel>
-          <Select
-            {...field}
-            aria-required={optional ? 'false' : 'true'}
-            label={fieldControllerLabel}
-            renderValue={(selected) => {
-              const found = options?.find((option) => optionValueAccessor(option) === selected);
+    <FormControl
+      {...muiProps?.formControlProps}
+      error={invalid}
+      fullWidth
+    >
+      <InputLabel {...muiProps?.inputLabelProps}>{fieldControllerLabel}</InputLabel>
+      <Select
+        {...field}
+        aria-required={optional ? 'false' : 'true'}
+        label={fieldControllerLabel}
+        renderValue={(selected) => {
+          const found = options?.find((option) => optionValueAccessor(option) === selected);
 
-              if (found) {
-                if (optionExtraLabelAccessor?.(found) && displayExtraLabelWhenValueSelected) {
-                  return `${optionLabelAccessor(found)}, ${optionExtraLabelAccessor(found)}`;
-                }
+          if (found) {
+            if (optionExtraLabelAccessor?.(found) && displayExtraLabelWhenValueSelected) {
+              return `${optionLabelAccessor(found)}, ${optionExtraLabelAccessor(found)}`;
+            }
 
-                return optionLabelAccessor(found);
-              }
+            return optionLabelAccessor(found);
+          }
 
-              return '';
-            }}
-            {...selectProps}
+          return '';
+        }}
+        {...selectProps}
+      >
+        {loading && (
+          <MenuItem
+            {...muiProps?.loadingMenuItemProps}
+            disabled
           >
-            {loading && (
-              <MenuItem
-                {...muiProps?.loadingMenuItemProps}
-                disabled
-              >
-                <Stack
-                  alignItems='center'
-                  flexDirection='row'
-                  justifyContent='space-between'
-                  width='100%'
-                  {...muiProps?.loadingStackProps}
-                >
-                  <Typography {...muiProps?.loadingTypographyProps}>{fieldControllerLoadingLabel}</Typography>
-                  <CircularProgress
-                    size={30}
-                    {...muiProps?.loadingCircularProgressProps}
-                  />
-                </Stack>
-              </MenuItem>
-            )}
-            {loadingError && (
-              <MenuItem
-                {...muiProps?.errorMenuItemProps}
-                disabled
-              >
-                <Typography {...muiProps?.errorTypographyProps}>{fieldControllerLoadingErrorLabel}</Typography>
-              </MenuItem>
-            )}
-            {shouldDisplayOptions && options?.length === 0 && (
-              <MenuItem
-                disabled
-                {...muiProps?.noOptionsMenuItemProps}
-              >
-                <Typography {...muiProps?.noOptionsTypographyProps}>{fieldControllerNoOptionsLabel}</Typography>
-              </MenuItem>
-            )}
-            {shouldDisplayOptions &&
-              options?.map((option) => (
-                <MenuItem
-                  {...muiProps?.menuItemProps}
-                  key={optionValueAccessor(option)}
-                  value={optionValueAccessor(option)}
-                >
-                  <ListItemText
-                    {...muiProps?.listItemTextProps}
-                    primary={optionLabelAccessor(option)}
-                    secondary={optionExtraLabelAccessor?.(option)}
-                  />
-                </MenuItem>
-              ))}
-          </Select>
-          {invalid && (
-            <FormHelperText {...muiProps?.formHelperTextProps}>
-              {onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
-            </FormHelperText>
-          )}
-        </FormControl>
+            <Stack
+              alignItems='center'
+              flexDirection='row'
+              justifyContent='space-between'
+              width='100%'
+              {...muiProps?.loadingStackProps}
+            >
+              <Typography {...muiProps?.loadingTypographyProps}>{fieldControllerLoadingLabel}</Typography>
+              <CircularProgress
+                size={30}
+                {...muiProps?.loadingCircularProgressProps}
+              />
+            </Stack>
+          </MenuItem>
+        )}
+        {loadingError && (
+          <MenuItem
+            {...muiProps?.errorMenuItemProps}
+            disabled
+          >
+            <Typography {...muiProps?.errorTypographyProps}>{fieldControllerLoadingErrorLabel}</Typography>
+          </MenuItem>
+        )}
+        {shouldDisplayOptions && options?.length === 0 && (
+          <MenuItem
+            disabled
+            {...muiProps?.noOptionsMenuItemProps}
+          >
+            <Typography {...muiProps?.noOptionsTypographyProps}>{fieldControllerNoOptionsLabel}</Typography>
+          </MenuItem>
+        )}
+        {shouldDisplayOptions &&
+          options?.map((option) => (
+            <MenuItem
+              {...muiProps?.menuItemProps}
+              key={optionValueAccessor(option)}
+              value={optionValueAccessor(option)}
+            >
+              <ListItemText
+                {...muiProps?.listItemTextProps}
+                primary={optionLabelAccessor(option)}
+                secondary={optionExtraLabelAccessor?.(option)}
+              />
+            </MenuItem>
+          ))}
+      </Select>
+      {invalid && (
+        <FormHelperText {...muiProps?.formHelperTextProps}>
+          {onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
+        </FormHelperText>
       )}
-    />
+    </FormControl>
   );
 };

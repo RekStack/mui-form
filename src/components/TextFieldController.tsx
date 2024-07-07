@@ -12,12 +12,12 @@ export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerPr
 
 export const TextFieldController = <FV extends FieldValues>({
   control,
+  controllerDisabled = false,
   label,
   name,
   optional = false,
   requiredLabel,
   onErrorMessage,
-  disabled = false,
   maxLength,
   ...textFieldProps
 }: TextFieldControllerProps<FV>) => {
@@ -29,13 +29,12 @@ export const TextFieldController = <FV extends FieldValues>({
     fieldState: { invalid, error },
   } = useController({
     control,
-    disabled,
+    disabled: controllerDisabled,
     name,
   });
 
   return (
     <TextField
-      {...textFieldProps}
       {...restField}
       aria-required={optional ? 'false' : 'true'}
       error={invalid}
@@ -48,6 +47,7 @@ export const TextFieldController = <FV extends FieldValues>({
           onChange(e);
         }
       }}
+      {...textFieldProps}
     />
   );
 };

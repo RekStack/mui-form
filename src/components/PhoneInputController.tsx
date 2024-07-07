@@ -10,19 +10,16 @@ import type { MuiTelInputProps } from 'mui-tel-input';
 export const matchIsValidTel = _matchIsValidTel;
 
 export type PhoneInputControllerProps<FV extends FieldValues> = FieldControllerProps<FV> &
-  DistributiveOmit<
-    MuiTelInputProps,
-    'onChange' | 'error' | 'helperText' | 'label' | 'name' | 'disabled' | 'value' | 'onBlur'
-  >;
+  DistributiveOmit<MuiTelInputProps, 'onChange' | 'error' | 'helperText' | 'label' | 'name' | 'value' | 'onBlur'>;
 
 export const PhoneInputController = <FV extends FieldValues>({
   control,
+  controllerDisabled = false,
   label,
   name,
   optional = false,
   requiredLabel,
   onErrorMessage,
-  disabled = false,
   ...muiTelInputProps
 }: PhoneInputControllerProps<FV>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
@@ -33,7 +30,7 @@ export const PhoneInputController = <FV extends FieldValues>({
     fieldState: { invalid, error },
   } = useController({
     control,
-    disabled,
+    disabled: controllerDisabled,
     name,
   });
 

@@ -13,7 +13,7 @@ export type DatePickerControllerProps<
 > = FieldControllerProps<FV> &
   Omit<
     DatePickerProps<PVD, PickerEnableAccessibleFieldDOMStructure>,
-    'label' | 'name' | 'disabled' | 'onChange' | 'value' | 'onBlur'
+    'label' | 'name' | 'onChange' | 'value' | 'onBlur'
   >;
 
 export const DatePickerController = <
@@ -22,12 +22,12 @@ export const DatePickerController = <
   PickerEnableAccessibleFieldDOMStructure extends boolean = false,
 >({
   control,
+  controllerDisabled = false,
   label,
   name,
   optional = false,
   requiredLabel,
   onErrorMessage,
-  disabled = false,
   ...datePickerProps
 }: DatePickerControllerProps<FV, PVD, PickerEnableAccessibleFieldDOMStructure>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
@@ -38,13 +38,12 @@ export const DatePickerController = <
     fieldState: { invalid, error },
   } = useController({
     control,
-    disabled,
+    disabled: controllerDisabled,
     name,
   });
 
   return (
     <DatePicker
-      {...datePickerProps}
       {...restField}
       aria-required={optional ? 'false' : 'true'}
       label={fieldControllerLabel}
@@ -57,6 +56,7 @@ export const DatePickerController = <
         },
       }}
       value={stringToDate(value)}
+      {...datePickerProps}
     />
   );
 };
