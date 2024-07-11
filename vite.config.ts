@@ -1,7 +1,7 @@
 import { defineConfig, mergeConfig } from 'vite';
+import { tanstackViteConfig } from '@tanstack/config/vite';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import { tanstackBuildConfig } from '@tanstack/config/build';
 import eslint from 'vite-plugin-eslint';
 import react from '@vitejs/plugin-react-swc';
 
@@ -28,7 +28,7 @@ const viteConfig = defineConfig({
   ],
 });
 
-const tanstackConfig = tanstackBuildConfig({
+const tanstackConfig = tanstackViteConfig({
   entry: './src/index.ts',
   outDir: './dist',
   srcDir: './src',
