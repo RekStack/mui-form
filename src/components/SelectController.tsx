@@ -13,6 +13,7 @@ import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
+  useOnErrorMessage,
 } from '../hooks/index';
 import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
@@ -89,6 +90,7 @@ export const SelectController = <FV extends FieldValues, Value extends ObjectLik
   ...selectProps
 }: SelectControllerProps<FV, Value>) => {
   const { fieldControllerLabel } = useFieldControllerLabels({ label, optional, requiredLabel });
+  const { fieldOnErrorMessage } = useOnErrorMessage({ onErrorMessage });
   const { fieldControllerLoadingErrorLabel, fieldControllerLoadingLabel } = useAsyncFieldControllerLabels({
     loadingErrorLabel,
     loadingLabel,
@@ -187,7 +189,7 @@ export const SelectController = <FV extends FieldValues, Value extends ObjectLik
       </Select>
       {invalid && (
         <FormHelperText {...muiProps?.formHelperTextProps}>
-          {onErrorMessage && error?.message ? onErrorMessage(error.message) : error?.message}
+          {error?.message ? fieldOnErrorMessage(error?.message) : null}
         </FormHelperText>
       )}
     </FormControl>
