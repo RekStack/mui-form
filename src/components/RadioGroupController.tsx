@@ -27,7 +27,7 @@ interface Option {
   // TODO: add option to pass this as string or function (label accessor)
   label: string;
   // TODO: add option to pass this as an object (value accessor and)
-  value: number | string;
+  value: number | string | boolean;
   muiProps?: OptionMuiProps;
 }
 
@@ -77,7 +77,7 @@ export const RadioGroupController = <FV extends FieldValues>({
         {options.map(({ label, value, muiProps }) => (
           <FormControlLabel
             control={<Radio {...muiProps?.radioProps} />}
-            key={value}
+            key={`${value}`}
             label={label}
             value={value}
             {...muiProps?.formControlLabelProps}
