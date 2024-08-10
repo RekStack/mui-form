@@ -5,7 +5,7 @@ import {
   useFieldControllerWithOptionsLabels,
   useOnErrorMessage,
 } from '../hooks/index';
-import { useController } from 'react-hook-form';
+import { useController, useWatch } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import type {
   AsyncFieldControllerProps,
@@ -88,9 +88,14 @@ export const AutocompleteController = <
   > | null>(initialValue ?? null);
 
   const {
-    field: { onChange, value, ...other },
+    field: { onChange, ...rest },
     fieldState: { invalid, error },
   } = useController({
+    control,
+    name,
+  });
+
+  const formValue = useWatch({
     control,
     name,
   });
@@ -99,21 +104,22 @@ export const AutocompleteController = <
    * Side effects
    */
   useEffect(() => {
-    if (value) {
-      const optionFound = options.find((option) => optionValueAccessor(option) === value);
+    if (formValue) {
+      const optionFound = options.find((option) => optionValueAccessor(option) === formValue);
 
       if (optionFound) {
         setSelectedValue(optionFound as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo> | null);
+        onChange(optionValueAccessor(optionFound));
       }
     }
-  }, [value, optionValueAccessor, options]);
+  }, [formValue, optionValueAccessor, options]);
 
   /**
    * Render
    */
   return (
     <Autocomplete
-      {...other}
+      {...rest}
       aria-required={optional ? 'false' : 'true'}
       getOptionLabel={(value) => {
         if (!value) {
