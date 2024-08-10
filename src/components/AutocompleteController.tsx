@@ -1,11 +1,11 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
-import { Controller, useController } from 'react-hook-form';
 import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
   useOnErrorMessage,
 } from '../hooks/index';
+import { useController } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import type {
   AsyncFieldControllerProps,
@@ -91,8 +91,8 @@ export const AutocompleteController = <
     field: { onChange, value, ...other },
     fieldState: { invalid, error },
   } = useController({
-    name,
     control,
+    name,
   });
 
   /**
@@ -101,11 +101,12 @@ export const AutocompleteController = <
   useEffect(() => {
     if (value) {
       const optionFound = options.find((option) => optionValueAccessor(option) === value);
+
       if (optionFound) {
         setSelectedValue(optionFound as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo> | null);
       }
     }
-  }, [value]);
+  }, [value, optionValueAccessor, options]);
 
   /**
    * Render
