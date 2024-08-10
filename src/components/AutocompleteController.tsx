@@ -1,12 +1,12 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { Controller, useController } from 'react-hook-form';
 import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
   useOnErrorMessage,
 } from '../hooks/index';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type {
   AsyncFieldControllerProps,
   FieldControllerProps,
@@ -87,67 +87,84 @@ export const AutocompleteController = <
     FreeSolo
   > | null>(initialValue ?? null);
 
+  const {
+    field: { onChange, value, ...other },
+    fieldState: { invalid, error },
+  } = useController({
+    name,
+    control,
+  });
+
+  /**
+   * Side effects
+   */
+  useEffect(() => {
+    if (value) {
+      const optionFound = options.find((option) => optionValueAccessor(option) === value);
+      if (optionFound) {
+        setSelectedValue(optionFound as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo> | null);
+      }
+    }
+  }, [value]);
+
+  /**
+   * Render
+   */
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field: { onChange, ...other }, fieldState: { invalid, error } }) => (
-        <Autocomplete
-          {...other}
-          aria-required={optional ? 'false' : 'true'}
-          getOptionLabel={(value) => {
-            if (!value) {
-              return '';
-            } else if (getOptionLabel) {
-              return getOptionLabel(value);
-            }
+    <Autocomplete
+      {...other}
+      aria-required={optional ? 'false' : 'true'}
+      getOptionLabel={(value) => {
+        if (!value) {
+          return '';
+        } else if (getOptionLabel) {
+          return getOptionLabel(value);
+        }
 
-            return '';
-          }}
-          isOptionEqualToValue={(option, value) => {
-            if (!value) {
-              return false;
-            } else if (isOptionEqualToValue) {
-              return isOptionEqualToValue(option, value);
-            }
+        return '';
+      }}
+      isOptionEqualToValue={(option, value) => {
+        if (!value) {
+          return false;
+        } else if (isOptionEqualToValue) {
+          return isOptionEqualToValue(option, value);
+        }
 
-            return false;
+        return false;
+      }}
+      loading={loading}
+      loadingText={fieldControllerLoadingLabel}
+      noOptionsText={loadingError ? fieldControllerLoadingErrorLabel : fieldControllerNoOptionsLabel}
+      onChange={(_: unknown, newValue) => {
+        setSelectedValue(newValue ?? null);
+        onChange(optionValueAccessor(newValue));
+      }}
+      options={options ?? []}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? (
+                  <CircularProgress
+                    color='primary'
+                    size={20}
+                  />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </>
+            ),
           }}
-          loading={loading}
-          loadingText={fieldControllerLoadingLabel}
-          noOptionsText={loadingError ? fieldControllerLoadingErrorLabel : fieldControllerNoOptionsLabel}
-          onChange={(_: unknown, newValue) => {
-            setSelectedValue(newValue ?? null);
-            onChange(optionValueAccessor(newValue));
-          }}
-          options={options ?? []}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress
-                        color='primary'
-                        size={20}
-                      />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-              {...muiProps?.textField}
-              error={invalid}
-              helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
-              label={fieldControllerLabel}
-            />
-          )}
-          value={selectedValue as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo>}
-          {...autocompleteProps}
+          {...muiProps?.textField}
+          error={invalid}
+          helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
+          label={fieldControllerLabel}
         />
       )}
+      value={selectedValue as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo>}
+      {...autocompleteProps}
     />
   );
 };
