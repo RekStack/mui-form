@@ -112,7 +112,7 @@ export const AutocompleteController = <
         onChange(optionValueAccessor(optionFound));
       }
     }
-  }, [formValue, optionValueAccessor, options]);
+  }, [formValue, optionValueAccessor, options, onChange]);
 
   /**
    * Render
