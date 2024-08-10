@@ -109,8 +109,10 @@ export const AutocompleteController = <
 
       if (optionFound) {
         setSelectedValue(optionFound as AutocompleteValue<Value, Multiple, DisableClearable, FreeSolo> | null);
-        onChange(optionValueAccessor(optionFound));
+        // onChange(optionValueAccessor(optionFound));
       }
+    } else {
+      setSelectedValue(null);
     }
   }, [formValue, optionValueAccessor, options, onChange]);
 
