@@ -77,9 +77,9 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.20",
-    "@mui/x-date-pickers": "^7.7.1",
-    "mui-tel-input": "^5.1.2",
+    "@mui/material": "^6.1.1",
+    "@mui/x-date-pickers": "^7.18.0",
+    "mui-tel-input": "^6.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.4"
