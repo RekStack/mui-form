@@ -1,5 +1,5 @@
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { resolve } from 'node:path';
 
 /**
  * List your npm packages here. The first package will be used as the versioner.
@@ -31,7 +31,6 @@ export const branchConfigs = {
   },
 };
 
-// eslint-disable-next-line no-underscore-dangle
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export const rootDir = resolve(__dirname, '..');
+export const rootDirectory = path.resolve(__dirname, '..');
