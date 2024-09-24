@@ -5,9 +5,9 @@ A collection of Material UI form inputs designed for seamless integration with R
 ## Get started:
 
 ```bash
+pnpm add @rekstack/mui-form@beta
 npm i @rekstack/mui-form@beta
 yarn add @rekstack/mui-form@beta
-pnpm add @rekstack/mui-form@beta
 ```
 
 ### Supported components:
