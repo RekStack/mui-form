@@ -1,20 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import { useController, useWatch } from 'react-hook-form';
+
 import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
   useOnErrorMessage,
 } from '../hooks/index';
-import { useController, useWatch } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+
+import type { AutocompleteProps, AutocompleteValue, ChipTypeMap, TextFieldProps } from '@mui/material';
+import type { FieldValues } from 'react-hook-form';
 import type {
   AsyncFieldControllerProps,
   FieldControllerProps,
   FieldControllerWithOptionsProps,
   ObjectLike,
 } from '../types/index';
-import type { AutocompleteProps, AutocompleteValue, ChipTypeMap, TextFieldProps } from '@mui/material';
-import type { FieldValues } from 'react-hook-form';
 
 interface MuiProps {
   textField?: TextFieldProps;
@@ -148,22 +150,24 @@ export const AutocompleteController = <
         onChange(optionValueAccessor(newValue));
       }}
       options={options ?? []}
-      renderInput={(params) => (
+      renderInput={(parameters) => (
         <TextField
-          {...params}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress
-                    color='primary'
-                    size={20}
-                  />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
+          {...parameters}
+          slotProps={{
+            input: {
+              ...parameters.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress
+                      color='primary'
+                      size={20}
+                    />
+                  ) : null}
+                  {parameters.InputProps.endAdornment}
+                </>
+              ),
+            },
           }}
           {...muiProps?.textField}
           error={invalid}

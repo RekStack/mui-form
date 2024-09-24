@@ -1,8 +1,8 @@
 import { FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
+
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
-import type { FieldControllerProps } from '../types/index';
-import type { FieldValues } from 'react-hook-form';
+
 import type {
   FormControlLabelProps,
   FormControlProps,
@@ -11,6 +11,8 @@ import type {
   RadioGroupProps,
   RadioProps,
 } from '@mui/material';
+import type { FieldValues } from 'react-hook-form';
+import type { FieldControllerProps } from '../types/index';
 
 interface MuiProps {
   formControlProps?: FormControlProps;

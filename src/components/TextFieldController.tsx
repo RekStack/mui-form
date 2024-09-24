@@ -1,9 +1,11 @@
 import { TextField } from '@mui/material';
 import { useController } from 'react-hook-form';
+
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
-import type { FieldControllerProps } from '../types/index';
-import type { FieldValues } from 'react-hook-form';
+
 import type { TextFieldProps } from '@mui/material';
+import type { FieldValues } from 'react-hook-form';
+import type { FieldControllerProps } from '../types/index';
 
 export type TextFieldControllerProps<FV extends FieldValues> = FieldControllerProps<FV> & { maxLength?: number } & Omit<
     TextFieldProps,
@@ -40,11 +42,11 @@ export const TextFieldController = <FV extends FieldValues>({
       error={invalid}
       helperText={error?.message ? fieldOnErrorMessage(error?.message) : null}
       label={fieldControllerLabel}
-      onChange={(e) => {
+      onChange={(event) => {
         if (maxLength === undefined) {
-          onChange(e);
-        } else if (e.target.value.length <= maxLength) {
-          onChange(e);
+          onChange(event);
+        } else if (event.target.value.length <= maxLength) {
+          onChange(event);
         }
       }}
       {...textFieldProps}

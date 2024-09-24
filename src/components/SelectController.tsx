@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   CircularProgress,
   FormControl,
@@ -9,20 +10,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { useController } from 'react-hook-form';
+
 import {
   useAsyncFieldControllerLabels,
   useFieldControllerLabels,
   useFieldControllerWithOptionsLabels,
   useOnErrorMessage,
 } from '../hooks/index';
-import { useController } from 'react-hook-form';
-import { useMemo } from 'react';
-import type {
-  AsyncFieldControllerProps,
-  FieldControllerProps,
-  FieldControllerWithOptionsProps,
-  ObjectLike,
-} from '../types/index';
+
 import type {
   CircularProgressProps,
   FormControlProps,
@@ -35,6 +31,12 @@ import type {
   TypographyProps,
 } from '@mui/material';
 import type { FieldValues } from 'react-hook-form';
+import type {
+  AsyncFieldControllerProps,
+  FieldControllerProps,
+  FieldControllerWithOptionsProps,
+  ObjectLike,
+} from '../types/index';
 
 interface MuiProps {
   formControlProps?: FormControlProps;

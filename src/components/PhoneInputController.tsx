@@ -1,13 +1,15 @@
-import { MuiTelInput, matchIsValidTel as _matchIsValidTel } from 'mui-tel-input';
+import { MuiTelInput } from 'mui-tel-input';
 import { useController } from 'react-hook-form';
+
 import { useFieldControllerLabels, useOnErrorMessage } from '../hooks/index';
-import type { DistributiveOmit, FieldControllerProps } from '../types/index';
-import type { FieldValues } from 'react-hook-form';
+
 import type { MuiTelInputProps } from 'mui-tel-input';
+import type { FieldValues } from 'react-hook-form';
+import type { DistributiveOmit, FieldControllerProps } from '../types/index';
 
 // Export mui-tel-input method that could help people to make validations
 // without the need to install the peer-dependency
-export const matchIsValidTel = _matchIsValidTel;
+export { matchIsValidTel } from 'mui-tel-input';
 
 export type PhoneInputControllerProps<FV extends FieldValues> = FieldControllerProps<FV> &
   DistributiveOmit<MuiTelInputProps, 'onChange' | 'error' | 'helperText' | 'label' | 'name' | 'value' | 'onBlur'>;
